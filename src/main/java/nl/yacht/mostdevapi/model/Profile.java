@@ -1,23 +1,22 @@
 package nl.yacht.mostdevapi.model;
 
+import java.util.List;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
-@Document("project")
-public class Project {
+@Document("profile")
+public class Profile {
 
     @Id
     private String id;
     private String name;
-    private String internalName;
+    private String role;
     private String description;
-    private int port;
-
-    public Project() {}
+    private List<SocialMedia> socialMediaList;
 
     public String getId() {
         return id;
@@ -35,12 +34,12 @@ public class Project {
         this.name = name;
     }
 
-    public String getInternalName() {
-        return internalName;
+    public String getRole() {
+        return role;
     }
 
-    public void setInternalName(String internalName) {
-        this.internalName = internalName;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getDescription() {
@@ -51,12 +50,12 @@ public class Project {
         this.description = description;
     }
 
-    public int getPort() {
-        return port;
+    public List<SocialMedia> getSocialMediaList() {
+        return socialMediaList;
     }
 
-    public void setPort(int port) {
-        this.port = port;
+    public void setSocialMediaList(List<SocialMedia> socialMediaList) {
+        this.socialMediaList = socialMediaList;
     }
 
     @Override
@@ -65,14 +64,14 @@ public class Project {
 
         if (o == null || getClass() != o.getClass()) { return false; }
 
-        Project project = (Project) o;
+        Profile profile = (Profile) o;
 
         return new EqualsBuilder()
-            .append(getPort(), project.getPort())
-            .append(getId(), project.getId())
-            .append(getName(), project.getName())
-            .append(getInternalName(), project.getInternalName())
-            .append(getDescription(), project.getDescription())
+            .append(getId(), profile.getId())
+            .append(getName(), profile.getName())
+            .append(getRole(), profile.getRole())
+            .append(getDescription(), profile.getDescription())
+            .append(getSocialMediaList(), profile.getSocialMediaList())
             .isEquals();
     }
 
@@ -81,9 +80,9 @@ public class Project {
         return new HashCodeBuilder(17, 37)
             .append(getId())
             .append(getName())
-            .append(getInternalName())
+            .append(getRole())
             .append(getDescription())
-            .append(getPort())
+            .append(getSocialMediaList())
             .toHashCode();
     }
 
@@ -92,9 +91,9 @@ public class Project {
         return new ToStringBuilder(this)
             .append("id", id)
             .append("name", name)
-            .append("internalName", internalName)
+            .append("role", role)
             .append("description", description)
-            .append("port", port)
+            .append("socialMediaList", socialMediaList)
             .toString();
     }
 }

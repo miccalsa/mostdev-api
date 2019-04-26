@@ -1,6 +1,8 @@
 package nl.yacht.mostdevapi.dto;
 
-import java.util.Objects;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
 import nl.yacht.mostdevapi.model.Project;
@@ -9,6 +11,7 @@ public class ProjectDto {
 
     private String id;
     private String name;
+    private String internalName;
     private String description;
     private int port;
 
@@ -30,6 +33,14 @@ public class ProjectDto {
         this.name = name;
     }
 
+    public String getInternalName() {
+        return internalName;
+    }
+
+    public void setInternalName(String internalName) {
+        this.internalName = internalName;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -49,33 +60,47 @@ public class ProjectDto {
     @Override
     public boolean equals(Object o) {
         if (this == o) { return true; }
+
         if (o == null || getClass() != o.getClass()) { return false; }
+
         ProjectDto that = (ProjectDto) o;
-        return port == that.port &&
-            Objects.equals(id, that.id) &&
-            Objects.equals(name, that.name) &&
-            Objects.equals(description, that.description);
+
+        return new EqualsBuilder()
+            .append(getPort(), that.getPort())
+            .append(getId(), that.getId())
+            .append(getName(), that.getName())
+            .append(getInternalName(), that.getInternalName())
+            .append(getDescription(), that.getDescription())
+            .isEquals();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, port);
+        return new HashCodeBuilder(17, 37)
+            .append(getId())
+            .append(getName())
+            .append(getInternalName())
+            .append(getDescription())
+            .append(getPort())
+            .toHashCode();
     }
 
     @Override
     public String toString() {
-        return "ProjectDto{" +
-            "id='" + id + '\'' +
-            ", name='" + name + '\'' +
-            ", description='" + description + '\'' +
-            ", port=" + port +
-            '}';
+        return new ToStringBuilder(this)
+            .append("id", id)
+            .append("name", name)
+            .append("internalName", internalName)
+            .append("description", description)
+            .append("port", port)
+            .toString();
     }
 
     public static ProjectDto convertProjectToDto(Project project) {
         ProjectDto dto = new ProjectDto();
         dto.setId(project.getId());
         dto.setName(project.getName());
+        dto.setInternalName(project.getInternalName());
         dto.setDescription(project.getDescription());
         dto.setPort(project.getPort());
         return dto;
