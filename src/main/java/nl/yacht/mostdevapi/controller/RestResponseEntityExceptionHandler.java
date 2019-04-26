@@ -14,7 +14,7 @@ import nl.yacht.mostdevapi.model.NotFoundException;
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<Object> handleAllExceptions(NotFoundException ex) {
+    public ResponseEntity<Object> handleNotFoundExceptions(NotFoundException ex) {
         this.logger.error(ex);
         ErrorDto errorDto = new ErrorDto();
         errorDto.setMessage(ex.getMessage());
