@@ -23,18 +23,18 @@ public class ProjectController {
     }
 
     @PostMapping(value = "/add")
-    public ResponseEntity<?> addProject(@RequestBody final ProjectDto projectDto) {
+    public ResponseEntity<Object> addProject(@RequestBody final ProjectDto projectDto) {
         this.projectService.addNewProject(projectDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<?> getProject(@PathVariable(value = "id") String id) {
+    public ResponseEntity<Object> getProject(@PathVariable(value = "id") String id) {
         return new ResponseEntity<>(this.projectService.findProjectById(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "/list", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<?> listProjects() {
+    public ResponseEntity<Object> listProjects() {
         return new ResponseEntity<>(this.projectService.listAllProjects(), HttpStatus.OK);
     }
 }

@@ -2,6 +2,9 @@ package nl.yacht.mostdevapi.dto;
 
 import java.util.Objects;
 
+
+import nl.yacht.mostdevapi.model.Project;
+
 public class ProjectDto {
 
     private String id;
@@ -67,5 +70,14 @@ public class ProjectDto {
             ", description='" + description + '\'' +
             ", port=" + port +
             '}';
+    }
+
+    public static ProjectDto convertProjectToDto(Project project) {
+        ProjectDto dto = new ProjectDto();
+        dto.setId(project.getId());
+        dto.setName(project.getName());
+        dto.setDescription(project.getDescription());
+        dto.setPort(project.getPort());
+        return dto;
     }
 }

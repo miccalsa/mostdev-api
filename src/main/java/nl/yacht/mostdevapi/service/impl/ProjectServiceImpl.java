@@ -1,12 +1,14 @@
 package nl.yacht.mostdevapi.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 import org.springframework.stereotype.Service;
 
 
 import nl.yacht.mostdevapi.dto.ProjectDto;
+import nl.yacht.mostdevapi.model.NotFoundException;
 import nl.yacht.mostdevapi.model.Project;
 import nl.yacht.mostdevapi.repository.ProjectRepository;
 import nl.yacht.mostdevapi.service.ProjectService;
@@ -31,12 +33,19 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project findProjectById(String id) {
-        return this.projectRepository.findById(id).orElse(new Project());
+    public ProjectDto findProjectById(String id) throws NotFoundException {
+        Project foundProject = this.projectRepository
+            .findById(id)
+            .orElseThrow(() -> new NotFoundException("No project found with id: " + id ));
+        return ProjectDto.convertProjectToDto(foundProject);
     }
 
     @Override
-    public List<Project> listAllProjects() {
-        return this.projectRepository.findAll();
+    public List<ProjectDto> listAllProjects() {
+        return this.projectRepository
+            .findAll()
+            .stream()
+            .map(ProjectDto::convertProjectToDto)
+            .collect(Collectors.toList());
     }
 }
