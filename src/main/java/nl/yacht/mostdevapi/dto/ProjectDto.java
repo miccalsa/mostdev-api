@@ -14,6 +14,9 @@ public class ProjectDto {
     private String internalName;
     private String description;
     private int port;
+    private String codeLink;
+    private String wikiLink;
+    private String demoLink;
 
     public ProjectDto() {}
 
@@ -57,6 +60,30 @@ public class ProjectDto {
         this.port = port;
     }
 
+    public String getCodeLink() {
+        return codeLink;
+    }
+
+    public void setCodeLink(String codeLink) {
+        this.codeLink = codeLink;
+    }
+
+    public String getWikiLink() {
+        return wikiLink;
+    }
+
+    public void setWikiLink(String wikiLink) {
+        this.wikiLink = wikiLink;
+    }
+
+    public String getDemoLink() {
+        return demoLink;
+    }
+
+    public void setDemoLink(String demoLink) {
+        this.demoLink = demoLink;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) { return true; }
@@ -71,6 +98,9 @@ public class ProjectDto {
             .append(getName(), that.getName())
             .append(getInternalName(), that.getInternalName())
             .append(getDescription(), that.getDescription())
+            .append(getCodeLink(), that.getCodeLink())
+            .append(getWikiLink(), that.getWikiLink())
+            .append(getDemoLink(), that.getDemoLink())
             .isEquals();
     }
 
@@ -82,6 +112,9 @@ public class ProjectDto {
             .append(getInternalName())
             .append(getDescription())
             .append(getPort())
+            .append(getCodeLink())
+            .append(getWikiLink())
+            .append(getDemoLink())
             .toHashCode();
     }
 
@@ -93,6 +126,9 @@ public class ProjectDto {
             .append("internalName", internalName)
             .append("description", description)
             .append("port", port)
+            .append("codeLink", codeLink)
+            .append("wikiLink", wikiLink)
+            .append("demoLink", demoLink)
             .toString();
     }
 
@@ -103,6 +139,9 @@ public class ProjectDto {
         dto.setInternalName(project.getInternalName());
         dto.setDescription(project.getDescription());
         dto.setPort(project.getPort());
+        dto.setCodeLink(String.format("https://gitlab.com/mostdev/%s", project.getInternalName()));
+        dto.setWikiLink(String.format("https://gitlab.com/mostdev/%s/wikis/home", project.getInternalName()));
+        dto.setDemoLink(String.format("https://vps.mostdev.io:%d/%s", project.getPort(), project.getInternalName()));
         return dto;
     }
 }
