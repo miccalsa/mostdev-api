@@ -6,5 +6,5 @@ public interface ProfileService {
 
     void addNewProfile(ProfileDto profileDto);
 
-    ProfileDto getProfileById(String id);
+    ProfileDto getProfileByEmail(String email);
 }

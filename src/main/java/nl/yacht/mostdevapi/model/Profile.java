@@ -13,7 +13,7 @@ public class Profile {
 
     @Id
     private String id;
-    private String name;
+    private String email;
     private String role;
     private String description;
     private List<SocialMedia> socialMediaList;
@@ -26,12 +26,12 @@ public class Profile {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getRole() {
@@ -68,7 +68,7 @@ public class Profile {
 
         return new EqualsBuilder()
             .append(getId(), profile.getId())
-            .append(getName(), profile.getName())
+            .append(getEmail(), profile.getEmail())
             .append(getRole(), profile.getRole())
             .append(getDescription(), profile.getDescription())
             .append(getSocialMediaList(), profile.getSocialMediaList())
@@ -79,7 +79,7 @@ public class Profile {
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
             .append(getId())
-            .append(getName())
+            .append(getEmail())
             .append(getRole())
             .append(getDescription())
             .append(getSocialMediaList())
@@ -90,7 +90,7 @@ public class Profile {
     public String toString() {
         return new ToStringBuilder(this)
             .append("id", id)
-            .append("name", name)
+            .append("email", email)
             .append("role", role)
             .append("description", description)
             .append("socialMediaList", socialMediaList)

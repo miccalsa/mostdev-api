@@ -30,8 +30,8 @@ public class ProfileController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<Object> getProfile(@PathVariable(value = "id") String id) {
-        return new ResponseEntity<>(this.profileService.getProfileById(id), HttpStatus.OK);
+    @GetMapping(value = "/{email}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    public ResponseEntity<Object> getProfile(@PathVariable(value = "email") String email) {
+        return new ResponseEntity<>(this.profileService.getProfileByEmail(email), HttpStatus.OK);
     }
 }

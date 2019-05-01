@@ -1,5 +1,7 @@
 package nl.yacht.mostdevapi.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 
@@ -27,11 +29,12 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public ProfileDto getProfileById(String id) {
-        Profile result = this.profileRepository
-            .findById(id)
-            .orElseThrow(() -> new NotFoundException("No profile found with id: " + id));
-
-        return ProfileDto.convertProfileToDto(result);
+    public ProfileDto getProfileByEmail(String email) {
+        List<Profile> result = this.profileRepository.findByEmail(email);
+        if (result.isEmpty()) {
+            throw new NotFoundException("No profile found with email: " + email);
+        } else {
+            return ProfileDto.convertProfileToDto(result.get(0));
+        }
     }
 }

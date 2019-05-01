@@ -101,7 +101,7 @@ public class ProfileDto {
     public static ProfileDto convertProfileToDto(Profile profile) {
         final ProfileDto profileDto = new ProfileDto();
         profileDto.setId(profile.getId());
-        profileDto.setName(profile.getName());
+        profileDto.setName(profile.getEmail());
         profileDto.setRole(profile.getRole());
         profileDto.setDescription(profileDto.getDescription());
         profileDto.setSocialMediaList(profile.getSocialMediaList());
