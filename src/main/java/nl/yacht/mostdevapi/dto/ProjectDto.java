@@ -141,7 +141,7 @@ public class ProjectDto {
         dto.setPort(project.getPort());
         dto.setCodeLink(String.format("https://gitlab.com/mostdev/%s", project.getInternalName()));
         dto.setWikiLink(String.format("https://gitlab.com/mostdev/%s/wikis/home", project.getInternalName()));
-        dto.setDemoLink(String.format("https://vps.mostdev.io:%d/%s", project.getPort(), project.getInternalName()));
+        dto.setDemoLink(String.format("https://vps.mostdev.io/%s", project.getInternalName()));
         return dto;
     }
 }

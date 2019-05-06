@@ -31,6 +31,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .authenticated()
             .antMatchers(HttpMethod.POST, "/projects/")
             .authenticated()
+            .antMatchers(HttpMethod.DELETE, "/projects")
+            .authenticated()
+            .antMatchers(HttpMethod.DELETE, "/projects/")
+            .authenticated()
             .and()
             .httpBasic();
     }
@@ -55,7 +59,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
         corsConfiguration.setAllowedMethods(Arrays.asList(
             HttpMethod.GET.name(),
-            HttpMethod.POST.name()
+            HttpMethod.POST.name(),
+            HttpMethod.DELETE.name()
         ));
         source.registerCorsConfiguration("/**", corsConfiguration);
         FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));

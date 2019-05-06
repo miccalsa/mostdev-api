@@ -5,7 +5,7 @@ services:
     build: .
     container_name: mostdev_api
     ports:
-      - 8086:8080
+      - 8080:8080
     working_dir: /yacht/app
     depends_on:
       - mongodb

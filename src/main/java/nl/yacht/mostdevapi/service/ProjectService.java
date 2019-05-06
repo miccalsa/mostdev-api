@@ -8,6 +8,8 @@ public interface ProjectService {
 
     void addNewProject(ProjectDto projectDto);
 
+    void removeProject(String id);
+
     ProjectDto findProjectById(String id);
 
     List<ProjectDto> listAllProjects();

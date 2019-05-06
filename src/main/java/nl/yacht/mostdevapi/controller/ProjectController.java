@@ -3,6 +3,7 @@ package nl.yacht.mostdevapi.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +28,13 @@ public class ProjectController {
     @PostMapping
     public ResponseEntity<Object> addProject(@RequestBody final ProjectDto projectDto) {
         this.projectService.addNewProject(projectDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    public ResponseEntity<Object> removeProject(@PathVariable(value = "id") String id) {
+        this.projectService.removeProject(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })

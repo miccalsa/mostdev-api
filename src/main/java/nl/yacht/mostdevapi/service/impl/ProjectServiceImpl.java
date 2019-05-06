@@ -27,9 +27,15 @@ public class ProjectServiceImpl implements ProjectService {
         final Project project = new Project();
         project.setName(projectDto.getName());
         project.setDescription(projectDto.getDescription());
+        project.setInternalName(projectDto.getInternalName());
         project.setPort(projectDto.getPort());
 
         this.projectRepository.save(project);
+    }
+
+    @Override
+    public void removeProject(String id) {
+        this.projectRepository.deleteById(id);
     }
 
     @Override
