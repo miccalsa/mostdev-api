@@ -10,4 +10,12 @@ COPY /target/mostdev-api-0.0.1.jar $YACHT_HOME/mostdev-api.jar
 
 WORKDIR $YACHT_HOME
 
-ENTRYPOINT ["java", "-Dspring.data.mongodb.uri=mongodb://mostdev-mongo:27017/mostdev-apps", "-Djava.security.egd=file:/dev/./urandom", "-jar", "mostdev-api.jar"]
+ARG mongoUrl
+
+ARG hashedAccess
+
+ENV mongoArg="-Dspring.data.mongodb.uri=$mongoUrl"
+
+ENV authArg="-Dnl.yacht.auth.hashedAccess=$hashedAccess"
+
+ENTRYPOINT ["sh", "-c", "java $mongoArg $authArg -Djava.security.egd=file:/dev/./urandom -jar mostdev-api.jar"]

@@ -3,6 +3,7 @@ package nl.yacht.mostdevapi.configuration;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,12 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Value("${nl.yacht.auth.hashedAccess}")
+    private String hashedAccess;
+
+    @Value("${nl.yacht.auth.user}")
+    private String username;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -48,8 +55,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
             .inMemoryAuthentication()
-            .withUser("root")
-            .password("$2a$04$OoxTLb5Thz32n49UIib9bOsPPCaXda2mwiiTDXd2y4lIHnpD4EC96")
+            .withUser(username)
+            .password(hashedAccess)
             .roles("USER");
     }
 
